@@ -30,25 +30,25 @@ public class UserController
 	}
 	
 	@GetMapping("/user")
-	public User getUser(@RequestParam int id) 
+	public ResponseEntity<ResponseStructure<User>> getUser(@RequestParam int id) 
 	{
 		return service.getUser(id) ;
 	}
 	
 	@GetMapping("/getAll")
-	public List<User> getAllUser()
+	public ResponseEntity<ResponseStructure<List<User>>> getAllUser()
 	{
 		return service.getAllUser() ;
 	}
 	
-	@DeleteMapping("/user")
-	public User deleteUser(int id) 
+	@DeleteMapping("/user/{id}")
+	public ResponseEntity<ResponseStructure<User>> deleteUser(@PathVariable int id) 
 	{
 		return service.deleteUser(id) ;
 	}
 	
 	@PutMapping("/user")
-	public User updateUser(int id, User user)
+	public ResponseEntity<ResponseStructure<User>> updateUser(@PathVariable int id, @RequestBody User user)
 	{
 		return service.updateUser(id, user) ;
 	}

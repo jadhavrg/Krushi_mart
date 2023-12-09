@@ -27,23 +27,59 @@ public class UserService
 		return new ResponseEntity<ResponseStructure<User>>(structure, HttpStatus.CREATED) ;
 	}
 	
-	public User getUser(int id)
+	public ResponseEntity<ResponseStructure<User>> getUser(int id)
 	{
-		return dao.getUser(id) ;
+		User dbUser = dao.getUser(id) ;
+		ResponseStructure<User> structure = new ResponseStructure<>() ;
+		if (dbUser != null) 
+		{
+			structure.setMessage("User is Found..!");
+			structure.setId(HttpStatus.FOUND.value());
+			structure.setData(dbUser);
+			return new ResponseEntity<ResponseStructure<User>>(structure, HttpStatus.FOUND) ;
+		}
+		return null ;
 	}
 	
-	public List<User> getAllUser()
+	public ResponseEntity<ResponseStructure<List<User>>> getAllUser()
 	{
-		return dao.getAllUser() ;
+		List<User> list = dao.getAllUser() ;
+		ResponseStructure<List<User>> structure = new ResponseStructure<>() ;
+		if (list.isEmpty()) 
+		{
+			return null ;
+		}
+		structure.setMessage("Users are Available..!");
+		structure.setId(HttpStatus.FOUND.value());
+		structure.setData(list);
+		return new ResponseEntity<ResponseStructure<List<User>>>(structure, HttpStatus.FOUND) ;
 	}
 	
-	public User deleteUser(int id) 
+	public ResponseEntity<ResponseStructure<User>> deleteUser(int id) 
 	{
-		return dao.deleteUser(id) ;
+		User user = dao.deleteUser(id) ;
+		ResponseStructure<User> structure = new ResponseStructure<>() ;
+		if (user != null) 
+		{
+			structure.setMessage("User is deleted..!");
+			structure.setId(HttpStatus.OK.value());
+			structure.setData(user);
+			return new ResponseEntity<ResponseStructure<User>>(structure, HttpStatus.OK) ;
+		}
+		return null ;
 	}
 	
-	public User updateUser(int id, User user)
+	public ResponseEntity<ResponseStructure<User>> updateUser(int id, User user)
 	{
-		return dao.updateUser(id,user) ;
+		User dbUser = dao.updateUser(id,user) ;
+		ResponseStructure<User> structure = new ResponseStructure<>() ;
+		if (dbUser != null) 
+		{
+			structure.setMessage("User is updated..!");
+			structure.setId(HttpStatus.OK.value());
+			structure.setData(dbUser);
+			return new ResponseEntity<ResponseStructure<User>>(structure, HttpStatus.OK) ;
+		}
+		return null ;
 	}
 }
