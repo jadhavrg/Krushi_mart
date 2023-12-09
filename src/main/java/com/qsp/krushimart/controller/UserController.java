@@ -3,6 +3,7 @@ package com.qsp.krushimart.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.qsp.krushimart.dto.User;
 import com.qsp.krushimart.service.UserService;
+import com.qsp.krushimart.util.ResponseStructure;
 
 @RestController
 public class UserController 
@@ -22,7 +24,7 @@ public class UserController
 	private UserService service ;
 	
 	@PostMapping("/user")
-	public User saveUser(@RequestBody User user)
+	public ResponseEntity<ResponseStructure<User>> saveUser(@RequestBody User user)
 	{
 		return service.saveUser(user) ;
 	}
