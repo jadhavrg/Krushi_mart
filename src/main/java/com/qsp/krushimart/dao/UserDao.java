@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.qsp.krushimart.dto.Product;
 import com.qsp.krushimart.dto.User;
 import com.qsp.krushimart.repo.UserRepo;
 
@@ -23,12 +24,12 @@ public class UserDao
 	public User getUser(int id) 
 	{
 		Optional<User> optional = repo.findById(id) ;
-		if (optional != null) 
+		if (optional.isPresent()) 
 		{
 			return optional.get() ;
 		}
 		return null ;
-	}
+	}	
 	
 	public List<User> getAllUser() 
 	{
@@ -56,4 +57,15 @@ public class UserDao
 		user.setId(id);
 		return repo.save(user) ;
 	}
+	
+	public User loginUser(String email, String password) 
+	{
+		User user = repo.findUserByEmail(email) ;
+		if (user.getPassword().equals(password)) 
+		{
+			return user ;
+		}
+		return null ;
+	}
+	
 }

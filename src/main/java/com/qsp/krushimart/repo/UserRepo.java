@@ -6,5 +6,8 @@ import com.qsp.krushimart.dto.User;
 
 public interface UserRepo extends JpaRepositoryImplementation<User, Integer>
 {
+	User findUserByEmail(String email) ; 
 	
+
+		
 }

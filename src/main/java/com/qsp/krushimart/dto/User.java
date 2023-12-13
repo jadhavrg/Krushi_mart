@@ -1,5 +1,7 @@
 package com.qsp.krushimart.dto;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +24,6 @@ public class User
 	private String email ;
 	private String role ;
 	private long phone ;
-//	@OneToMany(cascade = CascadeType.ALL)
-//	private Product product ;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Product> product ;
 }

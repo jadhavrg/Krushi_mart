@@ -6,7 +6,7 @@ import lombok.Data;
 public class ResponseStructure <T>
 {
 	private String message ;
-	private int id ;
+	private int status ;
 	private T data ;
 	
 }

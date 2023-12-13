@@ -52,4 +52,10 @@ public class UserController
 	{
 		return service.updateUser(id, user) ;
 	}
+	
+	@GetMapping("/loginUser")
+	public ResponseEntity<ResponseStructure<User>> loginUser(@RequestParam String email, @RequestParam String password) 
+	{
+		return service.loginUser(email, password) ;
+	}
 }

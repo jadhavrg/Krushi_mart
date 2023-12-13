@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.qsp.krushimart.dao.UserDao;
 import com.qsp.krushimart.dto.User;
+import com.qsp.krushimart.exception.IdNotFound;
+import com.qsp.krushimart.exception.LoginIsNotDone;
 import com.qsp.krushimart.util.ResponseStructure;
 
 @Service
@@ -21,7 +23,7 @@ public class UserService
 	{
 		ResponseStructure<User> structure = new ResponseStructure<>() ;
 		structure.setMessage("Account is created..!");
-		structure.setId(HttpStatus.CREATED.value());
+		structure.setStatus(HttpStatus.CREATED.value());
 		structure.setData(dao.saveUser(user));
 		
 		return new ResponseEntity<ResponseStructure<User>>(structure, HttpStatus.CREATED) ;
@@ -34,11 +36,12 @@ public class UserService
 		if (dbUser != null) 
 		{
 			structure.setMessage("User is Found..!");
-			structure.setId(HttpStatus.FOUND.value());
+			structure.setStatus(HttpStatus.FOUND.value());
 			structure.setData(dbUser);
 			return new ResponseEntity<ResponseStructure<User>>(structure, HttpStatus.FOUND) ;
 		}
-		return null ;
+//		return null ;
+		throw new IdNotFound("User is not Present..!") ;
 	}
 	
 	public ResponseEntity<ResponseStructure<List<User>>> getAllUser()
@@ -50,7 +53,7 @@ public class UserService
 			return null ;
 		}
 		structure.setMessage("Users are Available..!");
-		structure.setId(HttpStatus.FOUND.value());
+		structure.setStatus(HttpStatus.FOUND.value());
 		structure.setData(list);
 		return new ResponseEntity<ResponseStructure<List<User>>>(structure, HttpStatus.FOUND) ;
 	}
@@ -62,7 +65,7 @@ public class UserService
 		if (user != null) 
 		{
 			structure.setMessage("User is deleted..!");
-			structure.setId(HttpStatus.OK.value());
+			structure.setStatus(HttpStatus.OK.value());
 			structure.setData(user);
 			return new ResponseEntity<ResponseStructure<User>>(structure, HttpStatus.OK) ;
 		}
@@ -76,10 +79,25 @@ public class UserService
 		if (dbUser != null) 
 		{
 			structure.setMessage("User is updated..!");
-			structure.setId(HttpStatus.OK.value());
+			structure.setStatus(HttpStatus.OK.value());
 			structure.setData(dbUser);
 			return new ResponseEntity<ResponseStructure<User>>(structure, HttpStatus.OK) ;
 		}
 		return null ;
+	}
+	
+	public ResponseEntity<ResponseStructure<User>> loginUser(String email, String password) 
+	{
+		User user = dao.loginUser(email, password) ;
+		ResponseStructure<User> structure = new ResponseStructure<>() ;
+		if (user != null) 
+		{
+			structure.setMessage("Login Successfully..!");
+			structure.setStatus(HttpStatus.OK.value());
+			structure.setData(user);
+			return new ResponseEntity<ResponseStructure<User>>(structure, HttpStatus.OK) ;
+		}
+		
+		throw new LoginIsNotDone("Invalid Credentials..!") ;
 	}
 }
