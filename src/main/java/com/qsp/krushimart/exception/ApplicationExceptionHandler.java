@@ -30,4 +30,14 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler
 		structure.setData("Please First Register your Account...!");
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.BAD_REQUEST) ;
 	}
+	
+	@ExceptionHandler(DataIsNotAvailabe.class)
+	public ResponseEntity<ResponseStructure<String>> dataIsNotAvailableExceptionHamdler(DataIsNotAvailabe ex) 
+	{
+		ResponseStructure<String> structure = new ResponseStructure<>() ;
+		structure.setMessage(ex.getMessage());
+		structure.setStatus(HttpStatus.BAD_REQUEST.value());
+		structure.setData("Please Add Products First...!");
+		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.BAD_REQUEST) ;
+	}
 }
