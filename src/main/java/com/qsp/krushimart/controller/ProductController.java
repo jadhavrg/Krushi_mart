@@ -40,13 +40,13 @@ public class ProductController
 		return service.getAllProduct() ;
 	}
 	
-	@DeleteMapping("/product")
+	@DeleteMapping("/product/{id}")
 	public ResponseEntity<ResponseStructure<Product>> deleteProduct(@PathVariable int id) 
 	{
 		return service.deleteProduct(id) ;
 	}
 	
-	@PutMapping("/product")
+	@PutMapping("/product/{id}")
 	public ResponseEntity<ResponseStructure<Product>> updateProduct(@PathVariable int id, @RequestBody Product product) 
 	{
 		return service.updateProduct(id, product) ;

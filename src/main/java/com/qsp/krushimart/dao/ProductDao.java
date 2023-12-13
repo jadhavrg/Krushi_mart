@@ -10,6 +10,8 @@ import com.qsp.krushimart.dto.Product;
 import com.qsp.krushimart.exception.IdNotFound;
 import com.qsp.krushimart.repo.ProductRepo;
 
+import jakarta.servlet.http.HttpSession;
+
 @Repository
 public class ProductDao
 {
@@ -39,7 +41,7 @@ public class ProductDao
 	public Product deleteProduct(int id) 
 	{
 		Optional<Product> optional = repo.findById(id) ;
-		if (optional.isEmpty()) 
+		if (optional.isPresent()) 
 		{
 			repo.deleteById(id);
 			return optional.get() ;

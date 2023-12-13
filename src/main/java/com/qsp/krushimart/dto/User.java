@@ -24,6 +24,7 @@ public class User
 	private String email ;
 	private String role ;
 	private long phone ;
-	@OneToMany(cascade = CascadeType.ALL)
+	
+	@OneToMany(cascade =  CascadeType.ALL)
 	private List<Product> product ;
 }
