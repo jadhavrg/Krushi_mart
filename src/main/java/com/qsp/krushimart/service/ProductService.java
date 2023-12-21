@@ -1,5 +1,6 @@
 package com.qsp.krushimart.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,18 +45,31 @@ public class ProductService
 		throw new IdNotFound("Product with given Id is not found..!") ;
 	}
 	
-	public ResponseEntity<ResponseStructure<List<Product>>> getAllProduct() 
+//	public ResponseEntity<ResponseStructure<List<Product>>> getAllProduct() 
+//	{
+//		List<Product> list = dao.getAllProducts() ;
+//		ResponseStructure<List<Product>> structure = new ResponseStructure<>() ;
+//		if (list.isEmpty()) 
+//		{
+//			throw new DataIsNotAvailabe("Products are not available..!");
+//		}
+//		structure.setMessage("Products are Available..!");
+//		structure.setStatus(HttpStatus.FOUND.value());
+//		structure.setData(list);
+//		return new ResponseEntity<ResponseStructure<List<Product>>>(structure, HttpStatus.FOUND) ;
+//	}
+	
+	public List<Product> getAllProduct()
 	{
+//		List<Product> list = dao.getAllProducts() ;
+//		if (list.isEmpty()) 
+//		{
+//			throw new DataIsNotAvailabe("Products are not available..!");
+//		}
+//		return list ;
 		List<Product> list = dao.getAllProducts() ;
-		ResponseStructure<List<Product>> structure = new ResponseStructure<>() ;
-		if (list.isEmpty()) 
-		{
-			throw new DataIsNotAvailabe("Products are not available..!");
-		}
-		structure.setMessage("Products are Available..!");
-		structure.setStatus(HttpStatus.FOUND.value());
-		structure.setData(list);
-		return new ResponseEntity<ResponseStructure<List<Product>>>(structure, HttpStatus.FOUND) ;
+		Collections.reverse(list);
+		return list ;
 	}
 	
 	public ResponseEntity<ResponseStructure<Product>> deleteProduct(int id) 

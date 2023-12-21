@@ -67,5 +67,16 @@ public class UserDao
 		}
 		return null ;
 	}
+
+	public User profile(String email, String password)
+	{
+		User user = repo.findUserByEmailandPassword(email, password) ;
+		if (user != null)
+		{
+			return user ;
+		}
+		System.out.println("session is expaire......................");
+		return null;
+	}
 	
 }

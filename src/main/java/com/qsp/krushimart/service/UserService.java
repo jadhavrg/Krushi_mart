@@ -100,4 +100,14 @@ public class UserService
 		
 		throw new LoginIsNotDone("Invalid Credentials..!") ;
 	}
+
+	public User profile(String email, String password)
+	{
+		User user = dao.profile(email,password) ;
+		if (user != null)
+		{
+			return user ;
+		}
+		return null;
+	}
 }

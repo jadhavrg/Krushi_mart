@@ -1,9 +1,12 @@
 package com.qsp.krushimart.controller;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +20,7 @@ import com.qsp.krushimart.service.ProductService;
 import com.qsp.krushimart.util.ResponseStructure;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 public class ProductController 
 {
 	@Autowired
@@ -33,11 +37,17 @@ public class ProductController
 	{
 		return service.getProduct(id) ;
 	}
+//	
+//	@GetMapping("/products")
+//	public ResponseEntity<ResponseStructure<List<Product>>> getAllProduct() 
+//	{
+//		return service.getAllProduct() ;
+//	}
 	
 	@GetMapping("/products")
-	public ResponseEntity<ResponseStructure<List<Product>>> getAllProduct() 
+	public List<Product> getAllProduct()
 	{
-		return service.getAllProduct() ;
+	     return service.getAllProduct() ;
 	}
 	
 	@DeleteMapping("/product/{id}")
