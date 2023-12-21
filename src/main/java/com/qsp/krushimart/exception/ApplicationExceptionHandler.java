@@ -40,4 +40,14 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler
 		structure.setData("Please Add Products First...!");
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.BAD_REQUEST) ;
 	}
+	
+	@ExceptionHandler(UserNotFound.class)
+	public ResponseEntity<ResponseStructure<String>> userNotFoundExceptionHamdler(UserNotFound ex) 
+	{
+		ResponseStructure<String> structure = new ResponseStructure<>() ;
+		structure.setMessage(ex.getMessage());
+		structure.setStatus(HttpStatus.BAD_REQUEST.value());
+		structure.setData("Please register First...!");
+		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.BAD_REQUEST) ;
+	}
 }
