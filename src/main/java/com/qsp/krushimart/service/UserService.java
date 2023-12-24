@@ -1,5 +1,6 @@
 package com.qsp.krushimart.service;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.qsp.krushimart.dao.UserDao;
+import com.qsp.krushimart.dto.Product;
 import com.qsp.krushimart.dto.User;
 import com.qsp.krushimart.exception.IdNotFound;
 import com.qsp.krushimart.exception.LoginIsNotDone;
@@ -85,6 +87,25 @@ public class UserService
 		}
 		return null ;
 	}
+	
+	
+	
+	public User deleteProduct(int id) 
+	{
+		return dao.deleteProduct(id) ;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public ResponseEntity<ResponseStructure<User>> loginUser(String email, String password) 
 	{

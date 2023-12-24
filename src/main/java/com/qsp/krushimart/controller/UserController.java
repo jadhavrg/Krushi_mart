@@ -3,7 +3,9 @@ package com.qsp.krushimart.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.serviceloader.ServiceListFactoryBean;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.qsp.krushimart.dto.Product;
 import com.qsp.krushimart.dto.User;
 import com.qsp.krushimart.service.UserService;
 import com.qsp.krushimart.util.ResponseStructure;
@@ -58,8 +61,25 @@ public class UserController
 		return service.updateUser(id, user) ;
 	}
 	
-	@GetMapping("/loginUser")
-	public ResponseEntity<ResponseStructure<User>> loginUser(@RequestParam String email, @RequestParam String password) 
+	@DeleteMapping("/deleteProduct/{id}")
+	public User deleteProduct(int id) 
+	{
+		return service.deleteProduct(id) ;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@GetMapping("/loginUser/{email}/{password}")
+	public ResponseEntity<ResponseStructure<User>> loginUser(@PathVariable String email, @PathVariable String password) 
 	{
 //		this.session.setAttribute("email", email) ;
 //		this.session.setAttribute("password", password) ;

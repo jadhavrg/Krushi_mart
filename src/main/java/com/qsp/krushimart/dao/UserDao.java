@@ -58,6 +58,21 @@ public class UserDao
 		return repo.save(user) ;
 	}
 	
+	public User deleteProduct(int id) 
+	{
+		User user = getUser(id) ;
+		List<Product> products = user.getProduct() ;
+		if (products.isEmpty())
+		{
+			return null ;
+		}
+		for (Product product : products)
+		{
+			products.remove(product) ;
+		}
+		return user ;
+	}
+	
 	public User loginUser(String email, String password) 
 	{
 		User user = repo.findUserByEmail(email) ;
